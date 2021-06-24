@@ -1,0 +1,64 @@
+* {
+    font-family: 'Annie Use Your Telescope', cursive;
+}
+
+.crossedOut {
+    background-image: url(transparent-pen-scribble-png-image.jpg);
+    background-size: cover;
+    background-position-x: center;
+}
+
+body {
+    background-color: #a8dadc
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 30px;
+}
+
+.top-btn {
+    margin: auto 20px;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+.side-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-btn {
+    margin: 20px auto;
+}
+
+#main-grid {
+    width: fit-content;
+    margin: auto;
+    background-color: white;
+}
+
+.gridCell {
+    border: 1px solid black;
+    padding: 5px 0px;
+    width: 2em;
+    height: 1.5em;
+    text-align: center;
+}
+
+.gridRow {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+
