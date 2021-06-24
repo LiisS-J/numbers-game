@@ -15,50 +15,61 @@ body {
 h1 {
     text-align: center;
     color: white;
+    font-size: 4em;
+    margin-bottom: 40px;
 }
 
 .top-buttons {
     display: flex;
     justify-content: space-evenly;
-    margin: 30px;
+    margin: 10px 10px;
 }
 
 .top-btn {
     margin: auto 20px;
+    font-size: 1.2em;
+    width: 120px;
+    font-weight: bold;
 }
 
 .main-content {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    margin: 10px 370px 10px 160px
 }
 
 .side-buttons {
     display: flex;
     flex-direction: column;
+    margin: 150px auto;
 }
 
 .side-btn {
     margin: 20px auto;
+    font-size: 1.2em;
+    width: 120px;
+    font-weight: bold;
 }
 
 #main-grid {
     width: fit-content;
     margin: auto;
     background-color: white;
+    margin: 50px auto;
 }
 
 .gridCell {
     border: 1px solid black;
     padding: 5px 0px;
-    width: 2em;
-    height: 1.5em;
+    width: 2.3em;
+    height: 1.7em;
     text-align: center;
+    font-size: 17px;
+    font-weight: bold;
 }
 
 .gridRow {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
 }
 
 
