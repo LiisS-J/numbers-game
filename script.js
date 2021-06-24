@@ -119,7 +119,8 @@ squareClick.addEventListener('click', function(event) {
 // The game object that tracks which squares are clicked and how many
 
 const game = {
-    clickedSquares: []
+    clickedSquares: [],
+    bgColorIndex: 0
 }
 
 /*
@@ -188,11 +189,12 @@ backGroundPkr.addEventListener('click', function(){
 
 function bgPicker() {
     const colorArr = ['#e1ded5', '#eddcd2', '#a8dadc', '#FA9BA1', '#669bbc', '#8d99ae'];
-
-        for(let i = 0; i < colorArr.length; i++) {
-        document.body.style.backgroundColor = colorArr[i];
-        console.log(`this is the color coming up --> ${colorArr[i]}`);
-    };
+    if(game.bgColorIndex === colorArr.length -1){
+        game.bgColorIndex = 0;
+    } else {
+        game.bgColorIndex++;
+    }
+    document.body.style.backgroundColor = colorArr[game.bgColorIndex];
 };
 
 /*
@@ -205,7 +207,7 @@ const fastGame = document.querySelector('#fastGame');
 
 fastGame.addEventListener('click', function() {
     
-    const startMins = 0.25;
+    const startMins = 0.1;
     let time = startMins * 60;
     const countDownBtn = document.querySelector('#timer');
     const timer = setInterval(countDown, 1000);
@@ -220,9 +222,10 @@ fastGame.addEventListener('click', function() {
             seconds;
         }
 
-        countDownBtn.innerHTML = `${minutes}: ${seconds}`;
         time--;
-        if(time === 0){
+        countDownBtn.innerHTML = `${minutes}: ${seconds}`;
+
+        if(time < 0){
             alert("Time's out! You lost the game!");
             stopCountDown();
             clearcontent();
