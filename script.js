@@ -173,11 +173,6 @@ resetBtn.addEventListener('click', function () {
 });
 
 /*
- * This function loops through pre-set colors that will all serve as optional background colors for the BACKGROUND button
- * Make sure to finish this function!
- */
-
-/*
  * Connecting the BACKGROUND button to the bgPicker function
  */
 
@@ -188,7 +183,7 @@ backGroundPkr.addEventListener('click', function(){
 });
 
 function bgPicker() {
-    const colorArr = ['#e1ded5', '#eddcd2', '#a8dadc', '#FA9BA1', '#669bbc', '#8d99ae'];
+    const colorArr = ['#013a63', '#fc8f4e', '#57cc99', '#95a6a6', '#b392ac', '#a8dadc', '#FA9BA1', '#669bbc', '#8d99ae'];
     if(game.bgColorIndex === colorArr.length -1){
         game.bgColorIndex = 0;
     } else {
@@ -207,11 +202,12 @@ const fastGame = document.querySelector('#fastGame');
 
 fastGame.addEventListener('click', function() {
     
-    const startMins = 0.1;
+    const startMins = 0.25;
     let time = startMins * 60;
     const countDownBtn = document.querySelector('#timer');
     const timer = setInterval(countDown, 1000);
 
+    gameStarter();
     function countDown() {
         const minutes = Math.floor(time / 60);
         let seconds = time % 60;
@@ -226,7 +222,11 @@ fastGame.addEventListener('click', function() {
         countDownBtn.innerHTML = `${minutes}: ${seconds}`;
 
         if(time < 0){
-            alert("Time's out! You lost the game!");
+            const loseMsg = document.createElement('h1');
+            loseMsg.innerText = "TIME'S UP! YOU LOST THE GAME! (✖╭╮✖)"
+            loseMsg.setAttribute('id', 'loseMsg');
+            console.log(loseMsg);
+            document.body.querySelector('.main-content').appendChild(loseMsg);
             stopCountDown();
             clearcontent();
             gameStarter();
@@ -238,13 +238,3 @@ fastGame.addEventListener('click', function() {
         clearInterval(timer);
     }
 });
-
-
-/*
- * This function creates a new grid from the leftover numbers in each row and listens to the ADD ROWS button click
- */
-
-function newGrid() {
-    // use .push() method to push leftoer numbers into arrays that go into the gameGrid array
-}
-
