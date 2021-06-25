@@ -1,27 +1,27 @@
 /*
- * Numcell class holds the value and status for each individual cell
+ * Numcell class holds the value and status of each individual square.
  */
 class NumSquare {
     constructor(value) {
         this.status = true; 
         this.value = value;
-    }
-}
+    };
+};
 
 /*
- * SquarePosition class holds the position of each div(which column and which row it is)
+ * SquarePosition class holds the position of each square(which column and which row it is in).
  */
 
 class SquarePosition {
     constructor(row, column) {
         this.row = row;
         this.column = column;
-    }
-}
-
+    };
+};
 
 /*
- * starterGrid is template to how the gameGrid will look like after the gameStarter function runs
+ * starterGrid is a multi-dimensional array that serves as a template to gameStarter(). It holds all the number 
+ * values and positions for each square and gets pushed into the gameGrid when the gameStarter function runs.
  */
 let starterGrid = [
     [1,2,3,4,5,6,7,8,9],
@@ -45,20 +45,15 @@ let starterGrid = [
     [5,9,6,9,7,9,8,9,9]
 ];
 
-
-// Initialized the gameGrid
-// Find ways to populate the gameGrid by pushing each cell element into an object. That way, when we click on the 
-// numbers, they each hold a value and a status for comparison. It holds all the game data and keeps getting 
-// updates as numbers get truned off or new rows are added
+// Creates the game grid that gets rendered in the browser
 let gameGrid = [];
 
 /*
- * This function starts the game by creating a grid created by the DOM manipulation 
- *  and using the singleCell and createRow functions. It gets called ONLY when the START or RESET buttons are clicked
+ * gameStarter() function starts the game by creating a grid using DOM manipulation along with
+ * the singleCell() and createRow() functions.
  */
 function gameStarter() {
-
-    // build out gameGrid by a nested loop that loops over each row in the starterGrid array
+    // this loop loops over each row in the starterGrid array
     for(let i = 0; i < starterGrid.length; i++){
         gameGrid[i] = [];
         // This loop loops over each number square(singleDiv)
@@ -67,14 +62,10 @@ function gameStarter() {
         }
         createRow(i, starterGrid[i]);
     }
-    // console.log(gameGrid);
-      // for(let i = 0; i < gameGrid.length; i++) {
-    //     createRow(i, gameGrid[i]);
-    // }
 };
 
 /* 
- * Create a function that creates a single div element in the singleRow array 
+ * singleCell() creates a single div element(number square) in the singleRow array.
  */
 function singleCell(divIndex, num) {
     const singleDiv = document.createElement('div');
@@ -92,8 +83,8 @@ function createRow(rowIndex, rowOfNums) {
     singleRow.classList.add('gridRow');
     singleRow.setAttribute('data-index', rowIndex);
     /*
-     * this part of the function loops over each array element(cell) and appends that element 
-     * (while taking it's index into consideration) into the singleRow variable.
+     * this part of the function loops over each array element(singleDiv) and appends that element 
+     * into the singleRow variable.
      */
     for(let i = 0; i < rowOfNums.length; i++) {
         singleRow.appendChild(singleCell(i, rowOfNums[i]));
@@ -106,7 +97,6 @@ function createRow(rowIndex, rowOfNums) {
  */
 const squareClick = document.querySelector('#main-grid');
 squareClick.addEventListener('click', function(event) {
-    console.log(`InnerText of square --> ${event.target.innerText}`);
     let squareIdx = parseInt(event.target.getAttribute('data-index'));
     let rowIdx = parseInt(event.target.parentElement.getAttribute('data-index'));
     game.clickedSquares.push(new SquarePosition(rowIdx, squareIdx));
@@ -116,8 +106,8 @@ squareClick.addEventListener('click', function(event) {
     // get index of the square and the index of the parent(row)
 });
 
-// The game object that tracks which squares are clicked and how many
-
+// The game object tracks which two squares are clicked and which index the background array is currently selected with the
+// background button click
 const game = {
     clickedSquares: [],
     bgColorIndex: 0
@@ -125,7 +115,6 @@ const game = {
 
 /*
  * This function checks if the two numbers clicked add up to 10 or match in value
- * whenever they click a button, PUSH on clickSquares
  * Creating two variables that hold copies of game.clickedSquares[0]- first clicked num and 
  * game.clickedSquares[1]- second clicked num
  */
@@ -141,7 +130,8 @@ function matchSeeker(){
 };
 
 /*
- * This function covers the matched numbers with a png image to show they are taken
+ * This function updates the clicked number's status to false which turns it "off" in the game grid.
+ * It then covers the matched numbers with a png image to show they are matched up
  */
 function crossOut(sqPos){
     gameGrid[sqPos.row][sqPos.column].status = false;
@@ -156,7 +146,7 @@ function clearcontent(elementId) {
 }
 
 /* 
- * Connecting the gameStarter function to the START button and the RESET button, along with a clearContent() function
+ * Connecting the gameStarter() function to the START and the RESET buttons, along with a clearContent() function
  * that empties the grid and resets the game board.
  */
 const startBtn = document.querySelector('#start-btn');
@@ -173,17 +163,11 @@ resetBtn.addEventListener('click', function () {
 });
 
 /*
- * Connecting the BACKGROUND button to the bgPicker function
+ * This function loops through each index of the colorArr that hold values of pre-set colors. They keep getting looped through
+ * as long as the player clicks the BACKGROUND button
  */
-
-const backGroundPkr = document.querySelector('#bg-btn');
-
-backGroundPkr.addEventListener('click', function(){
-    bgPicker();
-});
-
 function bgPicker() {
-    const colorArr = ['#013a63', '#fc8f4e', '#57cc99', '#95a6a6', '#b392ac', '#a8dadc', '#FA9BA1', '#669bbc', '#8d99ae'];
+    const colorArr = ['#013a63', '#fc8f4e', '#57cc99', '#95a6a6', '#b392ac', '#a8dadc', '#fa9ba1', '#669bbc', '#8d99ae'];
     if(game.bgColorIndex === colorArr.length -1){
         game.bgColorIndex = 0;
     } else {
@@ -193,11 +177,17 @@ function bgPicker() {
 };
 
 /*
- * Creating anf connecting the FAST GAME button to the timer button
- * This function starts a timer from a creator's chosen value and counts down from it. It also clears the grid when time runs out.
- * FINISH THIS FUNCTION SO TIME COUNTS DOWN CORRECTLY AND ALERT COMES ON WHEN TIME'S ON 00!
+ * Connecting the BACKGROUND button to the bgPicker function
  */
+const backGroundPkr = document.querySelector('#bg-btn');
 
+backGroundPkr.addEventListener('click', function(){
+    bgPicker();
+});
+
+/*
+ * This countDown() function starts a timer from a pre-set value. It also clears and resets the grid when time runs out.
+ */
 const fastGame = document.querySelector('#fastGame');
 
 fastGame.addEventListener('click', function() {
@@ -225,7 +215,6 @@ fastGame.addEventListener('click', function() {
             const loseMsg = document.createElement('h1');
             loseMsg.innerText = "TIME'S UP! YOU LOST THE GAME! (✖╭╮✖)"
             loseMsg.setAttribute('id', 'loseMsg');
-            console.log(loseMsg);
             document.body.querySelector('.main-content').appendChild(loseMsg);
             stopCountDown();
             clearcontent();
@@ -233,7 +222,6 @@ fastGame.addEventListener('click', function() {
             return;
         }
     };
-
     function stopCountDown() {
         clearInterval(timer);
     }
