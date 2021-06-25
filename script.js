@@ -158,6 +158,7 @@ startBtn.addEventListener('click', function() {
 const resetBtn = document.querySelector('#reset-btn');
 
 resetBtn.addEventListener('click', function () {
+
     clearcontent();
     gameStarter();
 });
@@ -202,14 +203,12 @@ fastGame.addEventListener('click', function() {
         const minutes = Math.floor(time / 60);
         let seconds = time % 60;
 
-        if (seconds < 10) {
-            seconds = 0 + seconds;
-        } else {
-            seconds;
+        if(seconds < 10) {
+            seconds = '0' + seconds;
         }
 
         time--;
-        countDownBtn.innerHTML = `${minutes}: ${seconds}`;
+        countDownBtn.innerHTML = `${minutes} : ${seconds}`;
 
         if(time < 0){
             const loseMsg = document.createElement('h1');
@@ -224,5 +223,6 @@ fastGame.addEventListener('click', function() {
     };
     function stopCountDown() {
         clearInterval(timer);
+        countDownBtn.innerHTML = '';
     }
 });
