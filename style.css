@@ -72,7 +72,7 @@ button:hover {
 }
 
 .crossedOut {
-    background-image: url(transparent-pen-scribble-png-image.jpg);
+    background-image: url(imgs/transparent-pen-scribble-png-image.jpg);
     background-size: cover;
     background-position-x: center;
 }
